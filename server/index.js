@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
     res.send("<h1>Oi, usuário do meu servidor!</h1>")
 })
 
-app.post('/registro', (req, res) => {
+app.post('/signup', (req, res) => {
 
     try {
         var dados = req.body
@@ -19,7 +19,7 @@ app.post('/registro', (req, res) => {
         return
     }
 
-    if(!dados.nickname || !dados.email || !dados.password || !dados.birthday) { 
+    if(!dados.username || !dados.email || !dados.password || !dados.birthday) { 
         console.log("Dados insuficientes para criar usuário!")
         console.log(dados)
         res.status(406).send("Todos os campos devem ser enviados!")
@@ -28,7 +28,9 @@ app.post('/registro', (req, res) => {
 
     console.log("Usuário criado!")
     console.log(dados)
+
     res.status(201).send("Usuário criado com sucesso!")
+    return
 
 })
 
