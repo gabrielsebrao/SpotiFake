@@ -9,7 +9,6 @@ app.get('/', (req, res) => {
     res.send("<h1>Oi, usuário do meu servidor!</h1>")
 })
 
-criarTabelas()
 app.post('/registro', async (req, res) => {
 
     try {
@@ -21,10 +20,8 @@ app.post('/registro', async (req, res) => {
         console.log(req.body)
         return
     }
-    
-    console.log(dados)
 
-    if(!dados.username || !dados.email || !dados.password || !dados.birthday) { 
+    if(!dados.nickname || !dados.email || !dados.password || !dados.birthday) { 
         console.log("Dados insuficientes para criar usuário!")
         res.status(406).send("Todos os campos devem ser enviados!")
         return
@@ -50,7 +47,9 @@ app.post('/registro', async (req, res) => {
     })
 
     console.log("Usuário criado!")
+    console.log(dados)
     res.status(201).send("Usuário criado com sucesso!")
+    return
 
 })
 
