@@ -21,7 +21,7 @@ app.post('/registro', async (req, res) => {
         return
     }
 
-    if(!dados.nickname || !dados.email || !dados.password || !dados.birthday) { 
+    if(!dados.username || !dados.email || !dados.password || !dados.birthday) { 
         console.log("Dados insuficientes para criar usuário!")
         res.status(406).send("Todos os campos devem ser enviados!")
         return
@@ -50,6 +50,55 @@ app.post('/registro', async (req, res) => {
     console.log(dados)
     res.status(201).send("Usuário criado com sucesso!")
     return
+
+})
+
+app.post('/login', async () => {
+
+    try {
+        var dados = req.body
+    } catch(error) {
+        res.status(500).send("Erro interno do servidor")
+        console.log("Erro no servidor!")
+        console.log(error)
+        console.log(req.body)
+        return
+    }
+
+    console.log(dados)
+
+    if(!dados.username || !dados.password) { 
+        console.log("Dados insuficientes para logar!")
+        res.status(406).send("Todos os campos devem ser enviados!")
+        return
+    }
+
+    let user = await User.findOne({ where: { username: dados.username } })
+
+    if(!user) {
+        console.log("Username não existe!")
+        res.status(404).send("Username não encontrado!!")
+        return
+    }
+
+    if(!bcryptjs.compareSync(dados.password, user.password)) {
+        console.log("Senha incorreta!")
+        res.status(401).send("Senha incorreta!")
+        return
+    }
+
+    const token = jwt.sign(
+        {
+            nome: user.nome,
+            email: user.email,
+            _id: user.id
+        },
+        "jwtsuperseguro",
+        { expiresIn: 1000*60*60*24*365 }
+    )
+
+    console.log(token)
+    res.cookie("KawaiifyToken", token).send("Token efetuado com sucesso!")
 
 })
 
