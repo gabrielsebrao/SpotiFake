@@ -1,5 +1,5 @@
-import { User } from "../db.js";
-import bcryptjs from "bcryptjs";
+import { User } from "../db.js"
+import bcryptjs from "bcryptjs"
 
 const get_user = async (req, res) => {
     const id_req = req.params.id

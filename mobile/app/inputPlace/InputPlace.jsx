@@ -1,5 +1,5 @@
-import React from "react";
-import { Text, TextInput, View, StyleSheet, Image } from "react-native";
+import React from "react"
+import { Text, TextInput, View, StyleSheet, Image } from "react-native"
 
 export default function InputPlace({ label, icon, onChangeTextHandler, value }) {
     return (

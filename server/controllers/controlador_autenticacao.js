@@ -1,6 +1,6 @@
-import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { User } from "../db.js";
+import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"
+import { User } from "../db.js"
 
 const criarUsuario = async(req, res) => {
     try{
@@ -53,12 +53,11 @@ const login = async (req, res) => {
                 nome: usuario.nome,
                 email: usuario.email,
                 status: usuario.status
-            },//payload
-            'chavesupersegura', //chave de criptografia
-            {expiresIn: "30d"}//tempo de expiracao   
-            
-             
+            },
+            'chavesupersegura',
+            {expiresIn: "30d"}
         )
+        
         res.send({msg: "Você foi logado", token:token, user_id: usuario.id})
     } catch(error){
         console.log(error)

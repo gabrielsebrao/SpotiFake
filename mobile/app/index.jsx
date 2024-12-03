@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 40,
     },
-    
+
     logo: {
         width: 150,
         height: 150,
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     }
-});
+})

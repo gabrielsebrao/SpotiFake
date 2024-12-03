@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Text, TextInput, View, StyleSheet, Image, Pressable } from "react-native";
-import { AppContext } from "../../scripts/AppContext";
-import * as ImagePicker from 'expo-image-picker';    //npm install expo-image-picker
-import { router } from "expo-router";
+import React, { useEffect, useState, useContext } from "react"
+import { Text, TextInput, View, StyleSheet, Image, Pressable } from "react-native"
+import { AppContext } from "../../scripts/AppContext"
+import * as ImagePicker from 'expo-image-picker'
+import { router } from "expo-router"
 
 export default TelaPerfil = () => {
-    const { user, setUser } = useContext(AppContext);
-    const [image, setImage] = useState('');
+    const { user, setUser } = useContext(AppContext)
+    const [image, setImage] = useState('')
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -14,53 +14,53 @@ export default TelaPerfil = () => {
             allowsEditing: true,
             aspect: [4, 3],
             quality: 1,
-        });
-    
+        })
+
         if (!result.canceled) {
-            const newImageUri = result.assets[0].uri;
-            setImage(newImageUri);
-            handleSendImage(newImageUri);
+            const newImageUri = result.assets[0].uri
+            setImage(newImageUri)
+            handleSendImage(newImageUri)
         }
-    };
-    
+    }
+
     const handleSendImage = async (imageUri) => {
         try {
             const data = {
                 "file": imageUri,
                 "upload_preset": "ml_default",
-            };
+            }
             const res = await fetch("https://api.cloudinary.com/v1_1/dwescvnsn/upload", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify(data)
-            });
-            const result = await res.json();
-            setImage(result.url);
-            setUser({ ...user, profile_image: result.url });
-            await saveNewImageURLonBackend(result.url);
+            })
+            const result = await res.json()
+            setImage(result.url)
+            setUser({ ...user, profile_image: result.url })
+            await saveNewImageURLonBackend(result.url)
         } catch (e) {
-            console.log(e);
+            console.log(e)
         }
-    };
-    
+    }
+
     const saveNewImageURLonBackend = async (newImageUrl) => {
         try {
             const data = {
                 "profile_image": newImageUrl,
-            };
+            }
             const res = await fetch(`http://localhost:8000/user/save_user_image/${user.id}`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify(data)
-            });
+            })
         } catch (e) {
-            console.log(e);
+            console.log(e)
         }
-    };
+    }
 
     return (
         <View style={styles.container}>
@@ -79,15 +79,15 @@ export default TelaPerfil = () => {
                     {user.bio && <Text style={styles.user_bio}>{user.bio}</Text>}
                 </View>
 
-                <Pressable style={styles.button} onPress={() => {router.replace("/adBio")}}>
+                <Pressable style={styles.button} onPress={() => { router.replace("/adBio") }}>
                     <Text style={{ color: '#ffffff' }}>
                         {user.bio ? "Editar Bio" : "Adicionar Bio"}
                     </Text>
                 </Pressable>
 
-                <Pressable style={styles.button} onPress={() => {router.replace("/telaAlterarSenha")}}>
+                <Pressable style={styles.button} onPress={() => { router.replace("/telaAlterarSenha") }}>
                     <Text style={{ color: '#ffffff' }}>Alterar Senha</Text>
-                </Pressable>  
+                </Pressable>
             </View>
         </View>
     )
@@ -168,5 +168,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 10,
         fontStyle: 'italic',
-    },    
-});
+    },
+})

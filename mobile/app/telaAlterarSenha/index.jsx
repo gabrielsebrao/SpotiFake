@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Text, TextInput, View, StyleSheet, Image, Pressable } from "react-native";
+import React, { useEffect, useState, useContext } from "react"
+import { Text, TextInput, View, StyleSheet, Image, Pressable } from "react-native"
 import { Link, router } from "expo-router"
-import InputPlace from "../inputPlace/InputPlace";
-import { AppContext } from "../../scripts/AppContext";
+import InputPlace from "../inputPlace/InputPlace"
+import { AppContext } from "../../scripts/AppContext"
 
 
 export default TelaLogin = () => {
     const { user, setUser } = useContext(AppContext)
-    const [novaSenha, setNovaSenha] = React.useState('');
-    const [confirmarNovaSenha, setConfirmarNovaSenha] = React.useState('');
+    const [novaSenha, setNovaSenha] = React.useState('')
+    const [confirmarNovaSenha, setConfirmarNovaSenha] = React.useState('')
 
     const fetchData = async () => {
         try {
@@ -23,11 +23,11 @@ export default TelaLogin = () => {
                 })
             })
 
-            if (response.ok) { // Compare com === para evitar coerção de tipo
-                alert("Senha alterada com sucesso");
-                router.replace("/telaPerfil");
+            if (response.ok) {
+                alert("Senha alterada com sucesso")
+                router.replace("/telaPerfil")
             } else {
-                console.warn("Falha ao alterar senha. Status:", response.status);
+                console.warn("Falha ao alterar senha. Status:", response.status)
             }
         } catch (error) {
             console.error("Erro: ", error)

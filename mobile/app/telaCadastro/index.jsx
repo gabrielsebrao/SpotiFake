@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Text, TextInput, View, StyleSheet, Image, Pressable } from "react-native";
-import InputPlace from "./inputPlace/InputPlace";
-import { router } from "expo-router"; // Importação do router
+import React, { useEffect, useState } from "react"
+import { Text, TextInput, View, StyleSheet, Image, Pressable } from "react-native"
+import InputPlace from "./inputPlace/InputPlace"
+import { router } from "expo-router"
 
 export default TelaCadastro = () => {
 
-    const [name, setName] = React.useState('');
-    const [surname, setSurName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [birthdate, setBirthdate] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [name, setName] = React.useState('')
+    const [surname, setSurName] = React.useState('')
+    const [email, setEmail] = React.useState('')
+    const [birthdate, setBirthdate] = React.useState('')
+    const [password, setPassword] = React.useState('')
 
     const fetchData = async () => {
         try {
@@ -43,7 +43,7 @@ export default TelaCadastro = () => {
             </Pressable>
 
             <Text style={styles.title}>Crie sua conta</Text>
-            <View  style={styles.form}>
+            <View style={styles.form}>
                 <InputPlace style={styles.inputs} value={name} onChangeTextHandler={setName} icon={"https://img.icons8.com/?size=100&id=zxB19VPoVLjK&format=png&color=5732F1"} label={"Nome"} />
                 <InputPlace style={styles.inputs} value={surname} onChangeTextHandler={setSurName} icon={"https://img.icons8.com/?size=100&id=zxB19VPoVLjK&format=png&color=5732F1"} label={"Sobrenome"} />
                 <InputPlace style={styles.inputs} value={email} onChangeTextHandler={setEmail} icon={"https://img.icons8.com/?size=100&id=PedPR10iVAnY&format=png&color=5732F1"} label={"Email"} />
